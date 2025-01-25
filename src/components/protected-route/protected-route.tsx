@@ -2,7 +2,6 @@ import { Preloader } from '@ui';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
 import {
-  getCurrentUser,
   getIsAuthChecked,
   getIsAuthenticated
 } from '../../services/user/slice';
