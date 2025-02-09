@@ -6,6 +6,7 @@ type TordersState = {
   orders: TOrder[];
   orderModalData: TOrder | null;
   orderRequest: boolean;
+  isLoading: boolean;
   error: string;
 };
 
@@ -13,6 +14,7 @@ export const initialState: TordersState = {
   orders: [],
   orderModalData: null,
   orderRequest: false,
+  isLoading: false,
   error: ''
 };
 
@@ -34,8 +36,14 @@ export const ordersSlice = createSlice({
     builder
       .addCase(getOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(getOrders.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(getOrders.rejected, (state, action) => {
+        state.isLoading = false;
         state.error =
           (action.meta.rejectedWithValue
             ? (action.payload as SerializedError).message

@@ -17,7 +17,7 @@ import {
 import { clearOrder } from '../../services/order-burger/slice';
 import { createOrder } from '../../services/orders/actions';
 
-export const BurgerConstructor: FC = () => {
+export const BurgerConstructor: FC = ({ ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -72,6 +72,7 @@ export const BurgerConstructor: FC = () => {
       orderModalData={orderModalData}
       onOrderClick={onOrderClick}
       closeOrderModal={closeOrderModal}
+      {...props}
     />
   );
 };

@@ -44,11 +44,19 @@ export const userSlice = createSlice({
             ? (action.payload as SerializedError).message
             : action.error.message) || '';
       });
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.isAuthChecked = true;
-      state.isAuthenticated = true;
-    });
+    builder
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthChecked = true;
+        state.isAuthenticated = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isAuthChecked = true;
+        state.error =
+          (action.meta.rejectedWithValue
+            ? (action.payload as SerializedError).message
+            : action.error.message) || '';
+      });
     builder
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
