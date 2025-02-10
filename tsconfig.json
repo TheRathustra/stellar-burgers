@@ -16,7 +16,7 @@
     "noEmit": false,
     "jsx": "react-jsx",
     "types": ["node", "jest"],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@pages": ["src/pages"],
       "@components": ["src/components"],
@@ -28,5 +28,6 @@
       "@selectors": ["src/services/selectors"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "./cypress.d.ts"],
+  "exclude": ["node_modules", "cypress", "cypress.config.ts"] 
 }

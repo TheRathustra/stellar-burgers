@@ -34,12 +34,20 @@ export const burgerConstructorSlice = createSlice({
     },
     clearIngredient: (state) => initialState,
     downIngredient: (state, action: PayloadAction<number>) => {
+      if (action.payload > state.ingredients.length - 1) {
+        return;
+      }
+
       const index = action.payload;
       const currentItem = state.ingredients[action.payload];
       state.ingredients[index] = state.ingredients[index + 1];
       state.ingredients[index + 1] = currentItem;
     },
     upIngredient: (state, action: PayloadAction<number>) => {
+      if (action.payload > state.ingredients.length - 1) {
+        return;
+      }
+
       const index = action.payload;
       const currentItem = state.ingredients[index - 1];
       state.ingredients[index - 1] = state.ingredients[index];

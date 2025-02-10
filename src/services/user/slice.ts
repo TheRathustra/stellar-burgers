@@ -22,6 +22,9 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<TUser>) => {
       state.user = action.payload;
+    },
+    resetUser: (state) => {
+      Object.assign(state, initialState);
     }
   },
   selectors: {
@@ -39,16 +42,25 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isAuthChecked = true;
+        state.isAuthenticated = false;
         state.error =
           (action.meta.rejectedWithValue
             ? (action.payload as SerializedError).message
             : action.error.message) || '';
       });
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.isAuthChecked = true;
-      state.isAuthenticated = true;
-    });
+    builder
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthChecked = true;
+        state.isAuthenticated = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isAuthChecked = true;
+        state.error =
+          (action.meta.rejectedWithValue
+            ? (action.payload as SerializedError).message
+            : action.error.message) || '';
+      });
     builder
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -72,7 +84,7 @@ export const userSlice = createSlice({
   }
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, resetUser } = userSlice.actions;
 export const {
   getCurrentUser,
   getIsAuthChecked,
