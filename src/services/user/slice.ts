@@ -24,7 +24,7 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     resetUser: (state) => {
-      Object.assign(state, initialState)
+      Object.assign(state, initialState);
     }
   },
   selectors: {

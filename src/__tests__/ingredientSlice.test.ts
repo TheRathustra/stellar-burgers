@@ -75,7 +75,6 @@ describe('ingredientSlice', () => {
   });
 
   it('тест загрузки ингридиентов', async () => {
-
     expect(getCurrentState().isLoading).toBe(false);
     const promise = mockStore.dispatch(getIngredients());
     expect(getCurrentState().isLoading).toBe(true);

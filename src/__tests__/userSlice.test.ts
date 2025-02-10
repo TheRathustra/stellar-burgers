@@ -1,15 +1,20 @@
-import { getUser, login, registerUser, updateUser } from '../services/user/actions';
-import { initialState, resetUser, setUser, userSlice } from '../services/user/slice';
+import {
+  getUser,
+  login,
+  registerUser,
+  updateUser
+} from '../services/user/actions';
+import {
+  initialState,
+  resetUser,
+  setUser,
+  userSlice
+} from '../services/user/slice';
 import { mockStore } from './slices.mock';
 
 function getCurrentState() {
   return mockStore.getState().user;
 }
-
-const loginData = {
-  email: 'tes223@mail.ru',
-  password: '12345'
-};
 
 const testUser = {
   email: 'tes223@mail.ru',
@@ -29,7 +34,6 @@ const authResponse = {
 };
 
 describe('userSlice', () => {
-
   afterEach(async () => {
     jest.restoreAllMocks();
     await mockStore.dispatch(resetUser());
@@ -81,12 +85,12 @@ describe('userSlice', () => {
   });
 
   describe('register', () => {
-    
     it('должен установить isAuthChecked и isAuthenticated и вернуть пользователя при успешной регистрации', async () => {
       (global.fetch as jest.Mock) = jest.fn(() =>
         Promise.resolve({
           ok: true,
-          json: () => Promise.resolve({ ...authResponse, ...testUserCredentials })
+          json: () =>
+            Promise.resolve({ ...authResponse, ...testUserCredentials })
         })
       );
 
@@ -123,12 +127,12 @@ describe('userSlice', () => {
   });
 
   describe('login', () => {
-    
     it('должен установить isAuthChecked и isAuthenticated и вернуть пользователя при успешном логине', async () => {
       (global.fetch as jest.Mock) = jest.fn(() =>
         Promise.resolve({
           ok: true,
-          json: () => Promise.resolve({ ...authResponse, ...testUserCredentials })
+          json: () =>
+            Promise.resolve({ ...authResponse, ...testUserCredentials })
         })
       );
 
@@ -163,5 +167,4 @@ describe('userSlice', () => {
       expect(isAuthenticated).toBe(false);
     });
   });
-
 });

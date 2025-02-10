@@ -26,7 +26,7 @@ export const ordersSlice = createSlice({
       state.orderModalData = null;
     },
     resetOrders: (state) => {
-      Object.assign(state, initialState)
+      Object.assign(state, initialState);
     }
   },
   selectors: {
