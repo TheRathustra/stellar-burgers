@@ -182,9 +182,7 @@ describe('ordersSlice', () => {
     const { orderModalData, orderRequest } = getCurrentState();
 
     expect(orderRequest).toBe(false);
-
     expect(orderModalData).toEqual(expectedResultNewOrder.order);
-
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 });

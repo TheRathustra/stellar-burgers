@@ -22,6 +22,9 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<TUser>) => {
       state.user = action.payload;
+    },
+    resetUser: (state) => {
+      Object.assign(state, initialState)
     }
   },
   selectors: {
@@ -39,6 +42,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isAuthChecked = true;
+        state.isAuthenticated = false;
         state.error =
           (action.meta.rejectedWithValue
             ? (action.payload as SerializedError).message
@@ -80,7 +84,7 @@ export const userSlice = createSlice({
   }
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, resetUser } = userSlice.actions;
 export const {
   getCurrentUser,
   getIsAuthChecked,

@@ -75,23 +75,17 @@ describe('ingredientSlice', () => {
   });
 
   it('тест загрузки ингридиентов', async () => {
-    //В начале isLoading = false
+
     expect(getCurrentState().isLoading).toBe(false);
-
-    // Получаем ингридиенты
     const promise = mockStore.dispatch(getIngredients());
-
-    //Проверяем что идет загрузка
     expect(getCurrentState().isLoading).toBe(true);
 
-    // Дожидаемся завершения экшена
     await promise;
 
     const { ingredients, isLoading } = getCurrentState();
     expect(isLoading).toBe(false);
     expect(ingredients).toEqual(mockIngredients);
 
-    // Проверяем, что мок сработал и fetch был вызван один раз
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 });
