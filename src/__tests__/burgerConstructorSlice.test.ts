@@ -94,6 +94,15 @@ describe('burgerConstructorSlice', () => {
     expect(newState.bun?._id).toBe(undefined);
   });
 
+  it('должен не упасть при попытке удалить ингридиент из пустого конструктора', () => {
+    const newState = burgerConstructorSlice.reducer(
+      undefined,
+      removeIngredient('5')
+    );
+
+    expect(newState.ingredients).toHaveLength(0);
+  });
+
   it('должен удалить ингридиент', () => {
     const initialState = {
       bun: ingredients[0],
@@ -120,5 +129,21 @@ describe('burgerConstructorSlice', () => {
     );
 
     expect(newState.ingredients).toEqual([ingredient2, ingredient1]);
+  });
+
+  it('должен остаться в исходном состоянии при ошибочных индексах при перемещении ингридиентов', () => {
+    const ingredient1 = ingredients[1];
+    const ingredient2 = ingredients[2];
+    const initialState = {
+      bun: ingredients[0],
+      ingredients: [ingredient1, ingredient2]
+    };
+
+    const newState = burgerConstructorSlice.reducer(
+      initialState,
+      downIngredient(5)
+    );
+
+    expect(newState.ingredients).toEqual([ingredient1, ingredient2]);
   });
 });

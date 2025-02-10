@@ -1,6 +1,6 @@
 import { createOrder, getOrders } from '../services/orders/actions';
 import { ordersSlice, initialState } from '../services/orders/slice';
-import { mockStore } from './slices.mock';
+import { mockStore } from '../utils/slices.mock';
 
 const expectedResultUserOrders = {
   success: true,

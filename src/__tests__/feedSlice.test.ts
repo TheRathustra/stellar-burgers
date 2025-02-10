@@ -1,6 +1,6 @@
 import { feedSlice, initialState } from '../services/feed/slice';
 import { getFeeds, getOrderByNumber } from '../services/feed/actions';
-import { mockStore } from './slices.mock';
+import { mockStore } from '../utils/slices.mock';
 
 const mockCurrentOrder = '67a87594133acd001be4fa3e';
 

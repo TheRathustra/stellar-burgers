@@ -10,7 +10,7 @@ import {
   setUser,
   userSlice
 } from '../services/user/slice';
-import { mockStore } from './slices.mock';
+import { mockStore } from '../utils/slices.mock';
 
 function getCurrentState() {
   return mockStore.getState().user;

@@ -1,6 +1,6 @@
 import { getIngredients } from '../services/Ingredients/actions';
 import { ingredientSlice, initialState } from '../services/Ingredients/slice';
-import { mockStore } from './slices.mock';
+import { mockStore } from '../utils/slices.mock';
 
 const mockIngredients = [
   {

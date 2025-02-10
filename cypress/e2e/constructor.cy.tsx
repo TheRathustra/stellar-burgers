@@ -80,27 +80,34 @@ describe('работа модального окна', function () {
   });
 
   it('открытие модального окна', function () {
+    cy.get('[data-cy=modal]').should('not.exist');
     cy.get('[data-cy=bun-ingredients]').contains(bunName).click();
     cy.get('[data-cy=modal]').should('exist');
+    cy.get('[data-cy=modal]').contains(bunName);
     cy.get('[data-cy=modal-close-button]').click();
   });
 
   it('открытие модального окна и закрытие на крестик', () => {
+    cy.get('[data-cy=modal]').should('not.exist');
     cy.get('[data-cy=bun-ingredients]').contains(bunName).click();
     cy.get('[data-cy=modal]').should('exist');
+    cy.get('[data-cy=modal]').contains(bunName);
     cy.get('[data-cy=modal-close-button]').click();
     cy.get('[data-cy=modal]').should('not.exist');
   });
 
   it('открытие модального окна и закрытие на оверлей', () => {
+    cy.get('[data-cy=modal]').should('not.exist');
     cy.get('[data-cy=bun-ingredients]').contains(bunName).click();
     cy.get('[data-cy=modal]').should('exist');
+    cy.get('[data-cy=modal]').contains(bunName);
     cy.get('[data-cy=modal-overlay]').click('top', { force: true });
     cy.get('[data-cy=modal]').should('not.exist');
   });
 });
 
 describe('создание заказа', function () {
+  
   beforeEach(function () {
     cy.intercept('GET', 'api/auth/user', { fixture: 'user.json' }).as('login');
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' }).as('getIngredients');
@@ -134,6 +141,9 @@ describe('создание заказа', function () {
     cy.get('[data-cy=constructor]').contains(bunName).should('not.exist');
     cy.get('[data-cy=constructor]').contains(sauceName).should('not.exist');
     cy.get('[data-cy=constructor]').contains(mainName).should('not.exist');
+
+    cy.get('[data-cy=order-button]').contains('Оформить заказ').click();
+    cy.get('[data-cy=modal]').should('not.exist');
 
     cy.get('[data-cy=bun-ingredients]').contains('Добавить').click();
     cy.get('[data-cy=main-ingredients]').contains('Добавить').click();
